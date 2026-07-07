@@ -702,5 +702,21 @@
             },
             "recycled": true
         }
+    },
+    {
+        "video_name": "grok-video-207344b1-ccb4-4829-b0ca-f481676a8572.mp4",
+        "metadata": {
+            "title": "Scarlett Johnson on the Red Carpet \u2014 Fashion Queen Strikes Again",
+            "description": "Fashion has never seen a powerhouse quite like Scarlett Johnson. Each red carpet appearance is a masterclass in style \u2014 from sci-fi glam at the Dune premiere to Old Hollywood elegance at the Oscars. She works with Law Roach to create moments that define fashion history. The buzz cut with the Vera Wang gown. The Joan of Arc armor at the Met. The wet hair corset look. Every single time, she takes risks and every single time, she delivers. Comment which Scarlett Johnson look is your favorite! \ud83d\udc57 #scarlettjohnson #fashionicon #style #redcarpet #lawroach #metgala #highfashion #celebritystyle #couture #scarlettjohnsonstyle #fashiongoals #iconic",
+            "success_flags": {
+                "instagram_reel": false,
+                "instagram_story": false,
+                "facebook_reel": true,
+                "facebook_story": false,
+                "threads": false,
+                "youtube": false
+            },
+            "recycled": true
+        }
     }
 ]
