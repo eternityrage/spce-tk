@@ -1,0 +1,55 @@
+name: Delete All SpiceTok Videos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete-videos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Delete all videos
+        env:
+          FB_ACCESS_TOKEN: ${{ secrets.FACEBOOK_ACCESS_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+        run: |
+          python -c "
+import os, requests, time, json
+
+token = os.environ['FB_ACCESS_TOKEN']
+pid = os.environ['FB_PAGE_ID']
+
+print(f'Deleting videos from page {pid}...')
+
+url = f'https://graph.facebook.com/v20.0/{pid}/videos'
+params = {'fields': 'id', 'access_token': token, 'limit': 100}
+all_vids = []
+while url:
+    r = requests.get(url, params=params if '?' not in url else None)
+    data = r.json()
+    all_vids.extend(data.get('data', []))
+    url = data.get('paging', {}).get('next')
+    params = None
+
+print(f'Total videos: {len(all_vids)}')
+
+success = 0
+failed = 0
+for v in all_vids:
+    vid = v['id']
+    r = requests.delete(f'https://graph.facebook.com/v20.0/{vid}', params={'access_token': token})
+    if r.status_code == 200:
+        success += 1
+    else:
+        failed += 1
+    time.sleep(0.3)
+
+print(f'Deleted: {success} | Failed: {failed}')
+"
